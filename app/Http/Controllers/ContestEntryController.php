@@ -9,7 +9,7 @@ class ContestEntryController extends Controller
 {
     public function store(Request $request) {
         $data = $request->validate([
-            'email' => '',
+            'email' => 'required',
         ]);
 
         ContestEntry::create($data);

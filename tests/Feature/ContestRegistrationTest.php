@@ -35,7 +35,6 @@ class ContestRegistrationTest extends TestCase
      */
     public function an_email_is_required()
     {
-        $this->withoutExceptionHandling();
         $this->post('/contest', [
             'email' => '',
         ]);
