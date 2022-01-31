@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Events\NewEntryReceivedEvent;
 
 class ContestEntry extends Model
 {
@@ -13,10 +12,4 @@ class ContestEntry extends Model
     protected $fillable = [
         'email',
     ];
-
-    protected static function booted() {
-        static::created(function ($contestEntry) {
-            NewEntryReceivedEvent::dispatch();
-        });
-    }
 }
