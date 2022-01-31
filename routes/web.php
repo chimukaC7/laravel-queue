@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContestEntryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/contest', 'ContestEntryController@store');
+Route::post('/contest', [ContestEntryController::class, 'store']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
