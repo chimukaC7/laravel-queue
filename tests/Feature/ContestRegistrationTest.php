@@ -4,11 +4,19 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
+use App\Events\NewEntryReceivedEvent;
 use Tests\TestCase;
 
 class ContestRegistrationTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void {
+        parent::setUp();
+
+        Event::fake();
+    }
 
     /**
      * @test
@@ -56,5 +64,21 @@ class ContestRegistrationTest extends TestCase
         ]);
 
         $this->assertDatabaseCount('contest_entries', 0);
+    }
+
+    /**
+     * @test
+     * 
+     * Test an event is fired when user registers
+     *
+     * @return void
+     */
+    public function an_event_is_fired_when_user_registers()
+    {
+        $this->post('/contest', [
+            'email' => 'abc@abc.com',
+        ]);
+
+        Event::assertDispatched(NewEntryReceivedEvent::class);
     }
 }
