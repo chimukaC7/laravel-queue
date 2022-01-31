@@ -41,4 +41,20 @@ class ContestRegistrationTest extends TestCase
 
         $this->assertDatabaseCount('contest_entries', 0);
     }
+
+    /**
+     * @test
+     * 
+     * Test the email address has a valid format
+     *
+     * @return void
+     */
+    public function the_email_has_a_valid_format()
+    {
+        $this->post('/contest', [
+            'email' => 'Hello, I am not an email address!',
+        ]);
+
+        $this->assertDatabaseCount('contest_entries', 0);
+    }
 }
