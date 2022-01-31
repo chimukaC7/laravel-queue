@@ -15,7 +15,9 @@ class ContestRegistrationTest extends TestCase
     protected function setUp(): void {
         parent::setUp();
 
-        Event::fake();
+        Event::fake([
+            NewEntryReceivedEvent::class,
+        ]);
     }
 
     /**
