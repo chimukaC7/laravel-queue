@@ -2,8 +2,10 @@
 
 namespace App\Listeners;
 
+use App\Mail\WelcomeContestMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 
 class WelcomeContestEntryNotification
 {
@@ -25,6 +27,6 @@ class WelcomeContestEntryNotification
      */
     public function handle($event)
     {
-        dd('Listener');
+        Mail::to($event->contestEntry->email)->send(new WelcomeContestMail());
     }
 }

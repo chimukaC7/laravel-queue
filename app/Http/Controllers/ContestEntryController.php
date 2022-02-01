@@ -13,8 +13,8 @@ class ContestEntryController extends Controller
             'email' => 'required|email',
         ]);
 
-        ContestEntry::create($data);
+        $contestEntry = ContestEntry::create($data);
 
-        NewEntryReceivedEvent::dispatch();
+        NewEntryReceivedEvent::dispatch($contestEntry);
     }
 }
